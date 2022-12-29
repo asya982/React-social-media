@@ -1,0 +1,17 @@
+
+.nav {
+    grid-area: n;
+    background-color: #c1d4e9;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .item {
+    color: white;
+    text-decoration: none;
+  }
+
+  .active {
+    font-size: x-large;
+    color: #9f62ae;
+  }
