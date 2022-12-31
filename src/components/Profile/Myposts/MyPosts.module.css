@@ -1,4 +1,31 @@
-
 .posts {
-    margin: 20px auto;
+    margin: 20px 10px;
+}
+.newPost {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.newPost textarea{
+    width: 100%;
+    height: 3%;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.076);
+    resize: none;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow:2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.newPost button {
+    align-self: flex-end;
+    margin: 0;
+    width: 10%;
+}
+textarea:focus {
+    outline: none;
+    border: 2px solid #c1d4e9;
+    box-shadow: none;
 }

@@ -3,15 +3,24 @@
     grid-area: n;
     background-color: #c1d4e9;
     border-radius: 10px;
-    padding: 20px;
+    min-width: 150px;
+    padding: 30px;
   }
 
-  .item {
+.nav li {
+  margin: 5px;
+}
+
+.nav a {
     color: white;
-    text-decoration: none;
+    transition: font-size .1s;
   }
 
   .active {
     font-size: x-large;
+    color: #9f62ae !important;
+  }
+
+  a:hover {
     color: #9f62ae;
   }

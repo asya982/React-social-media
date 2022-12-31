@@ -1,0 +1,8 @@
+.dialog {
+    margin: 10px 0;
+}
+
+.active {
+    color: #9f62ae;
+    font-size: large;
+}

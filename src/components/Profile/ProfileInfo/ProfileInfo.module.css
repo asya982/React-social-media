@@ -1,0 +1,19 @@
+.banner {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+.description {
+    display: flex;
+    gap: 20px;
+    margin: 10px;
+  }
+  
+  .avatar {
+    width: 20%;
+    height: 20%;
+    border-radius: 10px;
+  }
+  

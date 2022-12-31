@@ -1,7 +1,15 @@
 * {
+  box-sizing: border-box;
   list-style: none;
   margin: 0;
   padding: 0;
+  animation: fade .2s linear;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+
 }
 
 .app-wrapper {
@@ -9,19 +17,23 @@
   grid-template-rows: 90px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
-  grid-template-areas: "h h"
-  "n c";
+  grid-template-areas:
+    "h h"
+    "n c";
   margin: 0 100px;
-
 }
 
-.avatar {
-  width: 10%;
-  height: 10%;
- }
+.app-wrapper-content {
+  grid-area: c;
+}
 
- .banner {
-  width: 100%;
-  height: 20%;
-  object-fit: cover;
- }
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

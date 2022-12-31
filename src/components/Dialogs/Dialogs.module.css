@@ -1,0 +1,10 @@
+.Dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 10px;
+    column-gap: 20px;
+}
+
+.Dialogs section:first-child {
+    border-right: 1px solid black;
+}

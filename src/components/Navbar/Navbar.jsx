@@ -1,18 +1,39 @@
 import React from "react";
-import style from './Navbar.module.css';
+import { NavLink } from "react-router-dom";
+import style from "./Navbar.module.css";
 
 const Navbar = () => {
- return (
+  return (
     <nav className={style.nav}>
-        <ul>
-          <li><a className={`${style.item} ${style.active}`} href='#s'>Profile</a></li>
-          <li><a className={style.item} href='#s'>Messages</a></li>
-          <li><a className={style.item} href='#s'>News</a></li>
-          <li><a className={style.item} href='#s'>Music</a></li>
-          <li><a className={style.item} href='#s'>Settings</a></li>
-        </ul>
-      </nav>
- );
+      <ul>
+        <li>
+          <NavLink className={ (navData) =>navData.isActive ? style.active : null } to="/profile">
+            Profile
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={ (navData)=> navData.isActive ? style.active : null } to="/dialogs">
+            Messages
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={ (navData) =>navData.isActive ? style.active : null } to="/news">
+            News
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={ (navData) =>navData.isActive ? style.active : null } to="/music">
+            Music
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={ (navData) =>navData.isActive ? style.active : null } to="/settings">
+            Settings
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
 export default Navbar;
