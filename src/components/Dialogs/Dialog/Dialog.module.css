@@ -3,6 +3,6 @@
 }
 
 .active {
-    color: #9f62ae;
+    color: var(--purple);
     font-size: large;
 }

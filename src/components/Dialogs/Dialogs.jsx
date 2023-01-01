@@ -14,7 +14,7 @@ const Dialogs = (props) => {
   let messageData = [
     { id: 1, message: "Hi" },
     { id: 2, message: "How are u?..." },
-    { id: 3, message: "Let`s watch urban rescue" },
+    { id: 3, message: "Let`s watch Papurika" },
     { id: 4, message: "Ok, let's go!!" },
     { id: 5, message: "Lov u my prescious boy" },
   ];

@@ -1,7 +1,7 @@
 
 .nav {
     grid-area: n;
-    background-color: #c1d4e9;
+    background-color: var(--blue);
     border-radius: 10px;
     min-width: 150px;
     padding: 30px;
@@ -18,9 +18,9 @@
 
   .active {
     font-size: x-large;
-    color: #9f62ae !important;
+    color: var(--purple) !important;
   }
 
   a:hover {
-    color: #9f62ae;
+    color: var(--purple);
   }

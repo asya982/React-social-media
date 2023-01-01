@@ -26,6 +26,6 @@
 }
 textarea:focus {
     outline: none;
-    border: 2px solid #c1d4e9;
+    border: 2px solid var(--blue);
     box-shadow: none;
 }
