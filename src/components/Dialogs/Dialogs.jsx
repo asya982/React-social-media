@@ -4,33 +4,31 @@ import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
 const Dialogs = (props) => {
-  let dialogsData = [
-    { id: 1, name: "Dimkins" },
-    { id: 2, name: "Alinka" },
-    { id: 3, name: "Specter" },
-    { id: 4, name: "HR" },
-  ];
+  let newMessageElement = React.createRef();
 
-  let messageData = [
-    { id: 1, message: "Hi" },
-    { id: 2, message: "How are u?..." },
-    { id: 3, message: "Let`s watch Papurika" },
-    { id: 4, message: "Ok, let's go!!" },
-    { id: 5, message: "Lov u my prescious boy" },
-  ];
+  let updateMessage = () => {
+    let newMessage = newMessageElement.current.value;
+    props.updateMessage(newMessage);
+  }
+  
+  let dialogElements = props.state.dialogsData.map((user) => (
+    <Dialog name={user.name} id={user.id} img={user.img} />
+  ));
 
-  let dialogElements = dialogsData.map((user) => <Dialog name={user.name} id={user.id} />);
-  let messageElements = messageData.map((message) => <Message message={message.message} />);
+  let messageElements = props.state.messageData.map((message) => (
+    <Message message={message.message} sentBy={message.sentBy} />
+  ));
 
   return (
     <>
-      <h2>Dialogs</h2>
       <div className={style.Dialogs}>
-        <section className={style.dialog_items}>
-          {dialogElements}
-        </section>
+        <section className={style.dialog_items}>{dialogElements}</section>
         <section className={style.messages}>
           {messageElements}
+          <div className={style.sendMessage}>
+            <textarea ref={newMessageElement} onChange={updateMessage} value={props.state.newMessage}></textarea>
+            <button onClick={props.addMessage}>Send</button>
+          </div>
         </section>
       </div>
     </>

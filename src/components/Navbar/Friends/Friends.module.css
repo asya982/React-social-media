@@ -1,0 +1,25 @@
+.Friends {
+    margin-top: 30px;   
+}
+
+.Friends a {
+    color: var(--purple) !important;
+    font-size: x-large;
+}
+
+
+.friendItems {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: space-around;
+    
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}

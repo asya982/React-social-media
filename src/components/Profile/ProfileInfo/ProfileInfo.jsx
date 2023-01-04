@@ -1,22 +1,33 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
+import banner from './banner.png'
 
-const ProfileInfo = (props) => (
-  <>
-    <img
-      className={styles.banner}
-      src="https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683_960_720.png"
-      alt="back"
-    />
-    <section className={styles.description}>
+const ProfileInfo = (props) => {
+  return (
+    <>
       <img
-        className={styles.avatar}
-        src="https://i.pinimg.com/564x/64/3a/e9/643ae95c09984ea6064d92305b5fe4b1.jpg"
-        alt="avatar"
+        className={styles.banner}
+        src={banner}
+        alt="back"
       />
-      <h2>description</h2>
-    </section>
-  </>
-);
+      <section className={styles.description}>
+        <img
+          className={styles.avatar}
+          src="https://i.pinimg.com/564x/64/3a/e9/643ae95c09984ea6064d92305b5fe4b1.jpg"
+          alt="avatar"
+        />
+        <div className={styles.userInfo}>
+          <h2>{props.userInfo.userName}</h2>
+          <p>
+            About: <span>{props.userInfo.description}</span>
+          </p>
+          <p>
+            Age: <span>{props.userInfo.age}</span>
+          </p>
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default ProfileInfo;

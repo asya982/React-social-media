@@ -1,3 +1,11 @@
 .message {
     margin: 10px 0;
+    background-color: var(--blue);
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(106, 110, 114);
+}
+
+.message p{
+    color: var(--purple);
 }

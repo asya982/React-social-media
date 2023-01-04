@@ -3,11 +3,11 @@ import MyPosts from "./Myposts/MyPosts";
 import style from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+const Profile = (props) => {
   return (
     <div>
-      <ProfileInfo />
-      <MyPosts />
+      <ProfileInfo userInfo={props.state.userInfo} />
+      <MyPosts postData = {props.state.postData} newPostText={props.state.newPostText} addPost = {props.addPost} updateTextPost={props.updateTextPost}/>
     </div>
   );
 };
