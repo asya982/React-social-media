@@ -1,3 +1,8 @@
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
+const SEND_MESSAGE = "SEND-MESSAGE";
+
 const store = {
     _state: {
         profilePage: {
@@ -11,6 +16,7 @@ const store = {
                 userName: "Asya",
                 description: "За допомогою дверей можна проходити крізь стіни",
                 age: 20,
+                avatar:"https://i.pinimg.com/564x/64/3a/e9/643ae95c09984ea6064d92305b5fe4b1.jpg"
 
             },
             newPostText: ""
@@ -24,13 +30,29 @@ const store = {
             ],
 
             messageData: [
-                { id: 1, message: "Hi", sentBy: "Dimkins" },
+                [{ id: 1, message: "Hi", sentBy: "Dimkins" },
                 { id: 2, message: "How are u?...", sentBy: "Asya" },
                 { id: 3, message: "Let`s watch Papurika", sentBy: "Dimkins" },
                 { id: 4, message: "Ok, let's go!!", sentBy: "Asya" },
-                { id: 5, message: "Lov u my prescious boy", sentBy: "Asya" },
+                { id: 5, message: "Lov u my prescious boy", sentBy: "Asya" }],
+                [{ id: 1, message: "How are you these days?", sentBy: "Alinka" },
+                { id: 2, message: "I'm fine", sentBy: "Asya" },
+                { id: 3, message: "What plans 4 today?", sentBy: "Alinka" },
+                { id: 4, message: "Going out with my bestie!", sentBy: "Asya" },
+                ],
+                [{ id: 1, message: "Did u watch yesterday's stream?", sentBy: "Specter" },
+                { id: 2, message: "Yeah, it was totall nuts!", sentBy: "Asya" },
+                { id: 3, message: "Today will be another one", sentBy: "Specter" },
+                { id: 4, message: "Ok, let's go!!", sentBy: "Asya" },
+                ],
+                [{ id: 1, message: "We want to hire you", sentBy: "HR" },
+                { id: 2, message: "Are you serious???", sentBy: "Asya" },
+                { id: 3, message: "Yes, come for interview tommorrow at 8 a.m", sentBy: "HR" },
+                { id: 4, message: "I'll be there!", sentBy: "Asya" },
+                ],
+
             ],
-            newMessage: ""
+            newMessage: { value: "", route: 0 }
         },
         navbar: {
             friends: [
@@ -41,57 +63,70 @@ const store = {
             ]
         }
     },
-
-    getState() {
-        return this._state;
-    },
-
     _callSubscriber() {
         console.log("State is changed");
     },
 
-    addMessage() {
-        let newMessage = {
-            id: this._state.messagesPage.messageData[this._state.messagesPage.messageData.length - 1].id + 1,
-            message: this._state.messagesPage.newMessage,
-            sentBy: "Asya"
-        };
-        if (this._state.messagesPage.newMessage) {
-            this._state.messagesPage.messageData.push(newMessage);
-            this._state.messagesPage.newMessage = '';
-            this._callSubscriber(this._state);
-        }
-    },
-
-    updateMessage(newMessage) {
-        
-        this._state.messagesPage.newMessage = newMessage;
-        this._callSubscriber(this._state);
-    },
-
-    addPost() {
-        let newPost = {
-            id: this._state.profilePage.postData[this._state.profilePage.postData.length - 1].id + 1,
-            message: this._state.profilePage.newPostText,
-            likes: 0
-        }
-
-        if (this._state.profilePage.newPostText) {
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state);
-        }
-    },
-
-    updateTextPost(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
     subscriber(observer) {
         this._callSubscriber = observer;
+    },
+    getState() {
+        return this._state;
+    },
+
+    addMessage() {
+
+    },
+    updateMessage(newMessage, location) {
+
+    },
+    addPost() {
+
+    },
+    updateTextPost(newText) {
+
+    },
+
+    dispatch(action) { // { type: 'ADD-POST' }
+        if (action.type === ADD_POST) {
+            let newPost = {
+                id: this._state.profilePage.postData[this._state.profilePage.postData.length - 1].id + 1,
+                message: this._state.profilePage.newPostText,
+                likes: 0
+            }
+
+            if (this._state.profilePage.newPostText) {
+                this._state.profilePage.postData.push(newPost);
+                this._state.profilePage.newPostText = ''
+                this._callSubscriber(this._state);
+            }
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.messagesPage.newMessage.value = action.newMessage;
+            this._state.messagesPage.newMessage.route = action.location;
+            this._callSubscriber(this._state);
+        } else if (action.type === SEND_MESSAGE) {
+            let newMessage = {
+                id: this._state.messagesPage.messageData[this._state.messagesPage.newMessage.route - 1].length + 1,
+                message: this._state.messagesPage.newMessage.value,
+                sentBy: "Asya"
+            };
+            if (this._state.messagesPage.newMessage.value) {
+                this._state.messagesPage.messageData[this._state.messagesPage.newMessage.route - 1].push(newMessage);
+                this._state.messagesPage.newMessage.value = '';
+                this._callSubscriber(this._state);
+            }
+        }
     }
 }
+
+export const addPostActionCreator = () => ({ type: ADD_POST });
+export const updateNewPostTextActionCreator = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
+
+export const updateNewMessageCreator = (newMessage, location) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessage: newMessage, location: location});
+export const sendMessageCreator = () => ({ type:SEND_MESSAGE });
 
 export default store;
 

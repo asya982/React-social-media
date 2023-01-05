@@ -1,31 +1,36 @@
 import React from "react";
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/state";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
   let postElements = props.postData.map((item) => (
-    <Post userName="ILoveDimkins" message={item.message} likes={item.likes} />
+    <Post userName={props.userInfo.userName} message={item.message} likes={item.likes} avatar={props.userInfo.avatar}/>
   ));
 
   let newPostElement = React.createRef();
 
-  let updateTextPost = () => {
+  let onPostChange = () => {
     let newText = newPostElement.current.value;
-    props.updateTextPost(newText);
+    props.dispatch( updateNewPostTextActionCreator(newText) );
+  };
+
+  let addPost = () => {
+    props.dispatch( addPostActionCreator() )
   };
 
   return (
-    <section className={style.posts}>
+    <section className={ style.posts }>
       <h3>My posts</h3>
-      <div className={style.newPost}>
+      <div className={ style.newPost }>
         <textarea
-          ref={newPostElement}
-          onChange={updateTextPost}
-          value={props.newPostText}
+          ref={ newPostElement }
+          onChange={ onPostChange }
+          value={ props.newPostText }
         ></textarea>
-        <button onClick={props.addPost}>Post</button>
+        <button onClick={ addPost }>Post</button>
       </div>
-      <div>{postElements}</div>
+      <div>{ postElements }</div>
     </section>
   );
 };

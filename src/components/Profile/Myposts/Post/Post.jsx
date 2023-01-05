@@ -7,13 +7,13 @@ const Post = (props) => {
     <div className={style.item}>
       <div className={style.container}>
         <img
-          src="https://i.pinimg.com/564x/64/3a/e9/643ae95c09984ea6064d92305b5fe4b1.jpg"
+          src={props.avatar}
           alt="avatar"
-          className={style.avatar}
+          className='avatar'
         />
         <div className={style.likes}>
           <span>{likes}</span>
-          <button onClick={() => setLikes(likes + 1)}>Like</button>
+          <button onClick={() => setLikes(likes + 1) }>Like</button>
         </div>
       </div>
       <div className={style.container}>

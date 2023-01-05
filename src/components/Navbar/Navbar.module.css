@@ -12,7 +12,7 @@
 }
 
 .nav a {
-    color: white;
+    color: var(--light);
     transition: font-size .1s;
   }
 

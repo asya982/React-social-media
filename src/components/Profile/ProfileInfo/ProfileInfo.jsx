@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
       <section className={styles.description}>
         <img
           className={styles.avatar}
-          src="https://i.pinimg.com/564x/64/3a/e9/643ae95c09984ea6064d92305b5fe4b1.jpg"
+          src={props.userInfo.avatar}
           alt="avatar"
         />
         <div className={styles.userInfo}>

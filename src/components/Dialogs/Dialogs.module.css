@@ -6,7 +6,7 @@
 }
 
 .Dialogs section:first-child {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--dark);
 }
 
 .messages {
