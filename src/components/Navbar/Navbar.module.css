@@ -1,4 +1,3 @@
-
 .nav {
     grid-area: n;
     background-color: var(--blue);
@@ -18,9 +17,9 @@
 
   .active {
     font-size: x-large;
-    color: var(--purple) !important;
+    color: var(--accent) !important;
   }
 
   a:hover {
-    color: var(--purple);
+    color: var(--accent);
   }

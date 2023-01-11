@@ -1,7 +1,6 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
-const SEND_MESSAGE = "SEND-MESSAGE";
+import messagesReducer from "./messagesReducer";
+import navbarReducer from "./navbarReducer";
+import profileReducer from "./profileReducer";
 
 const store = {
     _state: {
@@ -58,8 +57,8 @@ const store = {
             friends: [
                 { id: 1, name: "Dimkins", img: "https://i.pinimg.com/564x/e9/7a/03/e97a03628dde5de1f81c32ac2b4dac50.jpg" },
                 { id: 2, name: "Alinka", img: "https://i.pinimg.com/736x/37/66/fb/3766fb3469f305cacee6a09330a68427.jpg" },
-                { id: 3, name: "Specter", img: "https://i.pinimg.com/564x/5a/3d/77/5a3d770ea0afe88aa310ac95e92e5afd.jpg" }
-                // {id:4, name: "Kostik", img: "https://i.pinimg.com/564x/a7/24/71/a72471dd545f027432c22c77b8a2d805.jpg"},
+                { id: 3, name: "Specter", img: "https://i.pinimg.com/564x/5a/3d/77/5a3d770ea0afe88aa310ac95e92e5afd.jpg" },
+                {id:4, name: "Kostik", img: "https://i.pinimg.com/564x/a7/24/71/a72471dd545f027432c22c77b8a2d805.jpg"}
             ]
         }
     },
@@ -67,67 +66,19 @@ const store = {
         console.log("State is changed");
     },
 
-    subscriber(observer) {
+    subscribe(observer) {
         this._callSubscriber = observer;
     },
     getState() {
         return this._state;
     },
 
-    addMessage() {
-
-    },
-    updateMessage(newMessage, location) {
-
-    },
-    addPost() {
-
-    },
-    updateTextPost(newText) {
-
-    },
-
     dispatch(action) { // { type: 'ADD-POST' }
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: this._state.profilePage.postData[this._state.profilePage.postData.length - 1].id + 1,
-                message: this._state.profilePage.newPostText,
-                likes: 0
-            }
-
-            if (this._state.profilePage.newPostText) {
-                this._state.profilePage.postData.push(newPost);
-                this._state.profilePage.newPostText = ''
-                this._callSubscriber(this._state);
-            }
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.messagesPage.newMessage.value = action.newMessage;
-            this._state.messagesPage.newMessage.route = action.location;
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let newMessage = {
-                id: this._state.messagesPage.messageData[this._state.messagesPage.newMessage.route - 1].length + 1,
-                message: this._state.messagesPage.newMessage.value,
-                sentBy: "Asya"
-            };
-            if (this._state.messagesPage.newMessage.value) {
-                this._state.messagesPage.messageData[this._state.messagesPage.newMessage.route - 1].push(newMessage);
-                this._state.messagesPage.newMessage.value = '';
-                this._callSubscriber(this._state);
-            }
-        }
+       this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = messagesReducer(this._state.messagesPage, action);
+        this._state.navbar = navbarReducer(this._state.navbar, action);
+        this._callSubscriber(this._state);
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
-
-export const updateNewMessageCreator = (newMessage, location) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessage: newMessage, location: location});
-export const sendMessageCreator = () => ({ type:SEND_MESSAGE });
-
 export default store;
-
-window.store = store;

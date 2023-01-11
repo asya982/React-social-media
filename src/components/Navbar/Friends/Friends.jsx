@@ -5,7 +5,7 @@ import styles from "./Friends.module.css";
 
 const Friends = (props) => {
   let friend = props.friendsData.map((friend) => (
-    <Friend img={friend.img} name={friend.name} />
+    <Friend img={friend.img} name={friend.name} key={friend.id} />
   ));
   return (
     <div className={styles.Friends}>

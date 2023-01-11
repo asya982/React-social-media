@@ -7,6 +7,6 @@
 
 
 .active {
-    color: var(--purple);
+    color: var(--accent);
     font-size: large;
 }

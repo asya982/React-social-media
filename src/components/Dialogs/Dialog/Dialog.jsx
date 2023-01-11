@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./Dialog.module.css";
 
 const Dialog = (props) => {
+
+  let {selectUser} = props;
+
+  useEffect(() => {
+    selectUser(props.location);
+  }, [props.location, selectUser]);
+
   let isActive = (navData) => (navData.isActive ? style.active : null);
   return (
     <div className={style.dialog}>

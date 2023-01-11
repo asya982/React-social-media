@@ -1,0 +1,31 @@
+.song {
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  padding: 10px;
+}
+
+.name{
+    flex-grow: 1;
+    border-bottom: 5px solid var(--accent);
+    padding: 5px;
+}
+
+.name p:nth-child(2) {
+    font-size: 15px;
+    color: gray;
+}
+
+.song:hover {
+    color: var(--accent);
+    background-color: rgb(241, 238, 238);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.duration {
+    display: flex;
+    justify-content: flex-end;
+    color: gray;
+
+}

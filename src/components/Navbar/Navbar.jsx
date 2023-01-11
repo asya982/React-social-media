@@ -47,6 +47,14 @@ const Navbar = (props) => {
             Settings
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            className={(navData) => (navData.isActive ? style.active : null)}
+            to="/users"
+          >
+            Users
+          </NavLink>
+        </li>
       </ul>
       <Friends friendsData={props.state.friends} />
     </nav>

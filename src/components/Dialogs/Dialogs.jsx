@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { sendMessageCreator, updateNewMessageCreator } from "../../redux/state";
 import Dialog from "./Dialog/Dialog";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
@@ -8,30 +7,25 @@ import Message from "./Message/Message";
 const Dialogs = (props) => {
 
   let currentLocation = useLocation();
+  let location = currentLocation.pathname.slice(-1);
 
   let updateMessage = (e) => {
-    let location = currentLocation.pathname.slice(-1);
     let newMessage = e.target.value;
-    props.dispatch(updateNewMessageCreator(newMessage, location));
+    props.updateMessage(newMessage);
   };
 
-  let sendMessage = () => {
-    props.dispatch(sendMessageCreator())
-  }
-
-  let dialogElements = props.state.dialogsData.map((user) => (
-    <Dialog name={user.name} id={user.id} img={user.img} />
+  let dialogElements = props.messagesPage.dialogsData.map((user) => (
+    <Dialog name={user.name} id={user.id} img={user.img} key={user.id} location={location} selectUser={props.selectUser}/>
   ));
 
-  let messageElements = props.state.messageData.map((message, index) => (
-    <Route
+  let messageElements = props.messagesPage.messageData.map((message, index) => (
+    <Route key={index}
       path={"/" + (index + 1)}
       element={message.map((messageData) => (
-        <Message message={messageData.message} sentBy={messageData.sentBy} />
+        <Message key={message.id}  message={messageData.message} sentBy={messageData.sentBy} />
       ))}
     />
   ));
-
 
   return (
     <>
@@ -42,9 +36,9 @@ const Dialogs = (props) => {
           <div className={ style.sendMessage }>
             <textarea
               onChange={ updateMessage }
-              value={ props.state.newMessage.value }
+              value={ props.messagesPage.newMessage}
             ></textarea>
-            <button onClick={ sendMessage } >Send</button>
+            <button onClick={ props.sendMessage } >Send</button>
           </div>
         </section>
       </div>
