@@ -25,8 +25,8 @@ const User = (props) => {
           <p>{props.status}</p>
         </div>
         <div className={styles.location}>
-          <p>{`props.location?.city`},</p>
-          <p>{`props.location?.country`}</p>
+          <p>{props.location?.city || "Somewhere"},</p>
+          <p>{props.location?.country || "in the world"}</p>
         </div>
       </div>
     </div>

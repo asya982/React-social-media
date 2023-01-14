@@ -1,17 +1,29 @@
-import axios from "axios";
 import React from "react";
-import User from "./User/User";
 import styles from "./Users.module.css";
+import User from "./User/User";
 
 const Users = (props) => {
-  if (props.users.length === 0) {
-    axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then(responce => props.setUsers(responce.data.items));
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
-
+  let currrent = props.currentPage;
+  let previous = currrent - 5 < 0 ? 0 : currrent - 5;
+  let next = currrent + 5;
+  let slicedPages = pages.slice(previous, next);
   return (
     <div className={styles.Users}>
+      <div className={styles.usersCount}>
+        {slicedPages.map((p) => (
+          <span
+            className={props.currentPage === p && styles.selected}
+            onClick={(e) => props.onPageChanged(p)}
+          >
+            {p}
+          </span>
+        ))}
+      </div>
       {props.users.map((u) => (
         <User
           key={u.id}
