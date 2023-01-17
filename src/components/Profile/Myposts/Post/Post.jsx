@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import style from "./Post.module.css";
+import userIcon from "../../../../assets/images/login.png";
 
 const Post = (props) => {
   const [likes, setLikes] = useState(props.likes);
@@ -7,7 +8,7 @@ const Post = (props) => {
     <div className={style.item}>
       <div className={style.container}>
         <img
-          src={props.avatar}
+          src={props.avatar ? props.avatar : userIcon}
           alt="avatar"
           className='avatar'
         />

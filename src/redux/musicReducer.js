@@ -31,6 +31,6 @@ const musicReducer = (state = initialState, action) => {
     }
 };
 
-export const playStopAC = (id) => ({type: PLAY_STOP, id: id});
+export const playStop = (id) => ({type: PLAY_STOP, id: id});
 
 export default musicReducer;

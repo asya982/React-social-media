@@ -75,8 +75,8 @@ const messagesReducer = (state = initialState, action) => {
     }
 };
 
-export const updateNewMessageCreator = (newMessage) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessage });
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE });
-export const selectUserAC = (location) => ({ type: SELECT_USER, location });
+export const updateNewMessage = (newMessage) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessage });
+export const sendMessage = () => ({ type: SEND_MESSAGE });
+export const selectUser = (location) => ({ type: SELECT_USER, location });
 
 export default messagesReducer;

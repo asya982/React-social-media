@@ -17,7 +17,7 @@ const Users = (props) => {
       <div className={styles.usersCount}>
         {slicedPages.map((p) => (
           <span
-            className={props.currentPage === p && styles.selected}
+            className={props.currentPage === p ? styles.selected : undefined}
             onClick={(e) => props.onPageChanged(p)}
           >
             {p}

@@ -20,6 +20,7 @@
   .userInfo {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 20px;
     color: var(--dark);
   }
@@ -32,3 +33,18 @@
     font-weight: normal;
 
   }
+
+  .contacts {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .contacts a {
+    font-size: 25px;
+    transition: transform .2s ease-in;    
+  }
+  .contacts a:hover {
+    transform: translateY(4px);
+  }
+

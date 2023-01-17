@@ -11,7 +11,7 @@ const Dialogs = (props) => {
 
   let updateMessage = (e) => {
     let newMessage = e.target.value;
-    props.updateMessage(newMessage);
+    props.updateNewMessage(newMessage);
   };
 
   let dialogElements = props.messagesPage.dialogsData.map((user) => (

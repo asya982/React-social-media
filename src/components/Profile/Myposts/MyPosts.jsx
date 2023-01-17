@@ -3,8 +3,8 @@ import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  let postElements = props.profilePage.postData.map((item) => (
-    <Post userName={props.profilePage.userInfo.userName} message={item.message} likes={item.likes} key={item.id} avatar={props.profilePage.userInfo.avatar}/>
+  let postElements = props.postData.map((item) => (
+    <Post userName={props.userName} message={item.message} likes={item.likes} key={item.id} avatar={props.avatar}/>
   ));
 
   let onPostChange = (e) => {
@@ -18,7 +18,7 @@ const MyPosts = (props) => {
       <div className={ style.newPost }>
         <textarea
           onChange={ onPostChange }
-          value={ props.profilePage.newPostText }
+          value={ props.newPostText }
         ></textarea>
         <button onClick={ props.onAddPost }>Post</button>
       </div>

@@ -19,7 +19,10 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    profilePage: state.profilePage,
+    postData: state.profilePage.profile.postData,
+    avatar: state.profilePage.profile.userInfo.photos.small,
+    userName: state.profilePage.profile.userInfo.fullName,
+    newPostText: state.profilePage.newPostText
   };
 };
 

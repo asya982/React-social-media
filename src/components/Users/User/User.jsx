@@ -1,16 +1,19 @@
 import React from "react";
 import styles from "./User.module.css";
-import userIcon from "./../../../assets/images/login.png"
+import userIcon from "./../../../assets/images/login.png";
+import { NavLink } from "react-router-dom";
 
 const User = (props) => {
   return (
     <div className={styles.User}>
       <div className={styles.followed}>
-        <img
-          className={styles.avatar}
-          src={props.avatar ? props.avatar : userIcon}
-          alt={props.userName}
-        />
+        <NavLink to={'/profile/' + props.id}>
+          <img
+            className={styles.avatar}
+            src={props.avatar ? props.avatar : userIcon}
+            alt={props.userName}
+          />
+        </NavLink>
         <button
           onClick={() => {
             props.changeFollowState(props.id);

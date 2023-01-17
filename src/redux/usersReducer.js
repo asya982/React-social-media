@@ -51,11 +51,11 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
-export const changeFollowStateAC = (userId) => ({ type: CHANGE_FOLLOW_STATE, userId: userId});
-export const setUsersAC = (users) => ({ type: SET_USERS, users: users })
-export const setCurrentPageAC = (page) => ({ type: SET_CURRENT_PAGE, page })
-export const setTotalUsersAC = (count) => ({ type: SET_TOTAL_USERS, count })
-export const toggleIsFetchingAC = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
+export const changeFollowState = (userId) => ({ type: CHANGE_FOLLOW_STATE, userId: userId});
+export const setUsers = (users) => ({ type: SET_USERS, users: users })
+export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page })
+export const setTotalUsers = (count) => ({ type: SET_TOTAL_USERS, count })
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 
 export default usersReducer;
 

@@ -9,8 +9,4 @@ const Loader = () => (
   </div>
 );
 
-Loader.propTypes = {};
-
-Loader.defaultProps = {};
-
 export default Loader;
