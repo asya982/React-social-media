@@ -9,7 +9,7 @@ const Friends = (props) => {
   ));
   return (
     <div className={styles.Friends}>
-      <NavLink >Friends</NavLink>
+      <NavLink to={"/friends"}>Friends</NavLink>
       <div className={styles.friendItems}>{friend}</div>
     </div>
   );

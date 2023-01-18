@@ -1,11 +1,40 @@
 .header {
-    grid-area: h;
-    background-color: var(--blue);    
-    border-radius: 10px;
-  }
+  grid-area: h;
+  background-color: var(--blue);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .header img {
-    height: 100%;
-    width: auto;
-    margin-left: 10px;
-  }
+.logo {
+  height: 100%;
+}
+
+.logo img {
+  height: 100%;
+  margin-left: 10px;
+}
+
+.loginBlock {
+  border: 2px solid var(--light);
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.loginBlock:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  cursor: pointer;
+}
+.loginBlock:hover a {
+  color: var(--accent);
+}
+
+.loginBlock a {
+  color: var(--light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

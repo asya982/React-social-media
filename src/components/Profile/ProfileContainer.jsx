@@ -7,7 +7,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId ? this.props.router.params.userId : 26986;
+    let userId = this.props.router.params.userId;
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
       .then((responce) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Friends from "./Friends/Friends";
+import Friends from "../Friends/Friends";
 import style from "./Navbar.module.css";
 
 const Navbar = (props) => {
@@ -10,7 +10,7 @@ const Navbar = (props) => {
         <li>
           <NavLink
             className={(navData) => (navData.isActive ? style.active : null)}
-            to="/profile"
+            to="/profile/27546"
           >
             Profile
           </NavLink>

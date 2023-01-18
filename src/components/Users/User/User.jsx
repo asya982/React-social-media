@@ -7,20 +7,30 @@ const User = (props) => {
   return (
     <div className={styles.User}>
       <div className={styles.followed}>
-        <NavLink to={'/profile/' + props.id}>
+        <NavLink to={"/profile/" + props.id}>
           <img
             className={styles.avatar}
             src={props.avatar ? props.avatar : userIcon}
             alt={props.userName}
           />
         </NavLink>
-        <button
-          onClick={() => {
-            props.changeFollowState(props.id);
-          }}
-        >
-          {props.followed ? "Unfollow" : "Follow"}
-        </button>
+        {props.followed ? (
+          <button
+            onClick={() => {
+              props.changeFollowState(props.id, false);
+            }}
+          >
+            Unfollow
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              props.changeFollowState(props.id, true);
+            }}
+          >
+            Follow
+          </button>
+        )}
       </div>
       <div className={styles.info}>
         <div>

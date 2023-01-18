@@ -17,6 +17,7 @@ class UsersContainer extends React.Component {
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+        { withCredentials: true },
       )
       .then((responce) => {
         this.props.setUsers(responce.data.items);
@@ -25,12 +26,44 @@ class UsersContainer extends React.Component {
       });
   };
 
+  changeFollowState = (userId, follow) => {
+    if (follow) {
+      axios
+        .post(
+          "https://social-network.samuraijs.com/api/1.0/follow/" + userId,
+          {},
+          {
+            withCredentials: true,
+          },
+        )
+        .then((response) => {
+          if (response.data.resultCode === 0) {
+            this.props.changeFollowState(userId, true);
+          }
+        });
+    } else if (!follow) {
+      axios
+        .delete(
+          "https://social-network.samuraijs.com/api/1.0/follow/" + userId,
+          { withCredentials: true },
+        )
+        .then((response) => {
+          if (response.data.resultCode === 0) {
+            this.props.changeFollowState(userId, false);
+          }
+        });
+    }
+  };
+
   onPageChanged = (pageNumber) => {
     this.props.setCurrentPage(pageNumber);
     this.props.toggleIsFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+        {
+          withCredentials: true,
+        },
       )
       .then((responce) => {
         this.props.setUsers(responce.data.items);
@@ -50,7 +83,7 @@ class UsersContainer extends React.Component {
             currentPage={this.props.currentPage}
             onPageChanged={this.onPageChanged}
             users={this.props.users}
-            changeFollowState={this.props.changeFollowState}
+            changeFollowState={this.changeFollowState}
           />
         )}
       </>
@@ -73,5 +106,5 @@ export default connect(mapStateToProps, {
   setUsers,
   setCurrentPage,
   setTotalUsers,
-  toggleIsFetching
+  toggleIsFetching,
 })(UsersContainer);
