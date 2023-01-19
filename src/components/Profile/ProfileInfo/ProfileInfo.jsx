@@ -58,9 +58,9 @@ const ProfileInfo = (props) => {
           </p>
           <p className={styles.contacts}>
             Contacts:
-            {contacts.map((contact) => {
+            {contacts.map((contact, index) => {
               return contact.link ? (
-                <Link href={contact.link} id={contact.id} color="inherit" target="_blank" >
+                <Link href={contact.link} id={contact.id} color="inherit" target="_blank" key={index}>
                   {socialMediaName(contact.site)}
                 </Link>
               ) : null;

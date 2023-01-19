@@ -1,92 +1,17 @@
-import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
-import {
-  changeFollowState,
-  setCurrentPage,
-  setTotalUsers,
-  setUsers,
-  toggleIsFetching,
-} from "../../redux/usersReducer";
+import { getUsers, changeFollowingState } from "../../redux/usersReducer";
 import Users from "./Users";
 import Loader from "../Loader/Loader";
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-        { withCredentials: true },
-      )
-      .then((responce) => {
-        this.props.setUsers(responce.data.items);
-        this.props.setTotalUsers(responce.data.totalCount);
-        this.props.toggleIsFetching(false);
-      });
-  };
-
-  changeFollowState = (userId, follow) => {
-    if (follow) {
-      axios
-        .post(
-          "https://social-network.samuraijs.com/api/1.0/follow/" + userId,
-          {},
-          {
-            withCredentials: true,
-          },
-        )
-        .then((response) => {
-          if (response.data.resultCode === 0) {
-            this.props.changeFollowState(userId, true);
-          }
-        });
-    } else if (!follow) {
-      axios
-        .delete(
-          "https://social-network.samuraijs.com/api/1.0/follow/" + userId,
-          { withCredentials: true },
-        )
-        .then((response) => {
-          if (response.data.resultCode === 0) {
-            this.props.changeFollowState(userId, false);
-          }
-        });
-    }
-  };
-
-  onPageChanged = (pageNumber) => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-        {
-          withCredentials: true,
-        },
-      )
-      .then((responce) => {
-        this.props.setUsers(responce.data.items);
-        this.props.toggleIsFetching(false);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   };
 
   render = () => {
     return (
-      <>
-        {this.props.isFetching ? (
-          <Loader />
-        ) : (
-          <Users
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            currentPage={this.props.currentPage}
-            onPageChanged={this.onPageChanged}
-            users={this.props.users}
-            changeFollowState={this.changeFollowState}
-          />
-        )}
-      </>
+      <>{this.props.isFetching ? <Loader /> : <Users {...this.props} />}</>
     );
   };
 }
@@ -98,13 +23,10 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgres: state.usersPage.followingInProgres,
   };
 };
 
-export default connect(mapStateToProps, {
-  changeFollowState,
-  setUsers,
-  setCurrentPage,
-  setTotalUsers,
-  toggleIsFetching,
-})(UsersContainer);
+export default connect(mapStateToProps, { getUsers, changeFollowingState })(
+  UsersContainer,
+);

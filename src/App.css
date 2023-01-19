@@ -1,5 +1,5 @@
 :root {
-  --accent: #9E2B25;
+  --accent: rgb(158, 43, 37);
   --blue: #c1d4e9;
   --dark: #071E22;
   --light: #FFFDEE;
@@ -77,4 +77,16 @@ button:hover {
 button:active {
   box-shadow: none;
   transform: translateY(0);
+}
+
+button:disabled {
+  background-color: rgba(158, 43, 37, 0.5);
+  color: var(--accent);
+  cursor: not-allowed;
+  border: 2px solid var(--accent);
+}
+
+button:disabled:hover {
+  transform: none;
+  box-shadow: none;
 }

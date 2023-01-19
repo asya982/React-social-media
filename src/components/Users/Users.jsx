@@ -12,28 +12,27 @@ const Users = (props) => {
   let previous = currrent - 5 < 0 ? 0 : currrent - 5;
   let next = currrent + 5;
   let slicedPages = pages.slice(previous, next);
+
   return (
     <div className={styles.Users}>
       <div className={styles.usersCount}>
-        {slicedPages.map((p) => (
+        {slicedPages.map((p, index) => (
           <span
             className={props.currentPage === p ? styles.selected : undefined}
-            onClick={(e) => props.onPageChanged(p)}
+            onClick={ () => props.getUsers(p) }
+            key={index}
           >
             {p}
           </span>
         ))}
       </div>
-      {props.users.map((u) => (
+      {props.users.map((u, index) => (
         <User
-          key={u.id}
+          {...u}
+          key={index}
           avatar={u.photos.small}
-          status={u.status}
-          location={u.location}
-          followed={u.followed}
-          userName={u.name}
-          changeFollowState={props.changeFollowState}
-          id={u.id}
+          changeFollowState={props.changeFollowingState}
+          followingInProgres={props.followingInProgres}
         />
       ))}
     </div>

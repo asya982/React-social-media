@@ -11,7 +11,7 @@ const User = (props) => {
           <img
             className={styles.avatar}
             src={props.avatar ? props.avatar : userIcon}
-            alt={props.userName}
+            alt={props.Name}
           />
         </NavLink>
         {props.followed ? (
@@ -19,6 +19,7 @@ const User = (props) => {
             onClick={() => {
               props.changeFollowState(props.id, false);
             }}
+            disabled={props.followingInProgres.some((id) => id === props.id)}
           >
             Unfollow
           </button>
@@ -27,6 +28,7 @@ const User = (props) => {
             onClick={() => {
               props.changeFollowState(props.id, true);
             }}
+            disabled={props.followingInProgres.some((id) => id === props.id)}
           >
             Follow
           </button>
@@ -34,7 +36,7 @@ const User = (props) => {
       </div>
       <div className={styles.info}>
         <div>
-          <h2>{props.userName}</h2>
+          <h2>{props.name}</h2>
           <p>{props.status}</p>
         </div>
         <div className={styles.location}>
