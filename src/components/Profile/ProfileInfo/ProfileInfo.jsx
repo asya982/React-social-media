@@ -7,6 +7,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "@mui/material";
 import userIcon from "./../../../assets/images/login.png";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
   const availableSites = ["facebook", "twitter", "instagram", "github"];
@@ -45,6 +46,7 @@ const ProfileInfo = (props) => {
         />
         <div className={styles.userInfo}>
           <h2>{props.userInfo.fullName}</h2>
+          <ProfileStatus status="hello"/>
           <p>
             About: <span>{props.userInfo.aboutMe}</span>
           </p>

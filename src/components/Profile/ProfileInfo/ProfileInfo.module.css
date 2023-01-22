@@ -48,3 +48,30 @@
     transform: translateY(4px);
   }
 
+.status{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 2px solid rgb(192, 181, 181);
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+.status span {
+  padding: 5px;
+  width: 100%;
+}
+
+.status input {
+  padding: 5px;
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid var(--accent);
+}
+
+.status:hover span {
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: rgba(158, 43, 37, 0.5);
+  color: var(--light);
+}

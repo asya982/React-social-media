@@ -11,6 +11,7 @@ const Dialog = (props) => {
   }, [props.location, selectUser]);
 
   let isActive = (navData) => (navData.isActive ? style.active : null);
+  
   return (
     <div className={style.dialog}>
       <img src={props.img} alt={props.name} className='avatar'/>

@@ -27,6 +27,11 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
+}
+
+.status p{
+   word-break: break-all;
 }
 
 .location {
@@ -36,7 +41,7 @@
     font-weight: bold;
 }
 
-.info div:first-child {
+.status{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
