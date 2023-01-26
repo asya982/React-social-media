@@ -36,6 +36,12 @@ export const authentication = () => (dispatch) => {
             dispatch(setAuthUserData(id, email, login));
         }
     });
-}
+};
+
+export const userLogin = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(data => {
+        console.log(data)
+    })
+};
 
 export default authReducer;

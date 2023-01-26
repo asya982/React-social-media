@@ -38,6 +38,19 @@
     border: 2px solid var(--blue);
     padding: 15px;
     height: 100px;
-    margin-top: 30px;
-
 }
+
+.typing {
+    animation: typing 1s ease-in-out infinite;
+    margin: 10px 0;
+  }
+
+  @keyframes typing {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }

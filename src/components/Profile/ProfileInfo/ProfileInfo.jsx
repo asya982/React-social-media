@@ -15,7 +15,11 @@ const ProfileInfo = (props) => {
   let contacts = Object.keys(props.userInfo.contacts)
     .filter((contact) => availableSites.includes(contact))
     .map((contact, index) => {
-      return { site: contact, link: props.userInfo.contacts[contact], id:index};
+      return {
+        site: contact,
+        link: props.userInfo.contacts[contact],
+        id: index,
+      };
     });
 
   let socialMediaName = (name) => {
@@ -46,7 +50,7 @@ const ProfileInfo = (props) => {
         />
         <div className={styles.userInfo}>
           <h2>{props.userInfo.fullName}</h2>
-          <ProfileStatus status="hello"/>
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
           <p>
             About: <span>{props.userInfo.aboutMe}</span>
           </p>
@@ -62,7 +66,13 @@ const ProfileInfo = (props) => {
             Contacts:
             {contacts.map((contact, index) => {
               return contact.link ? (
-                <Link href={contact.link} id={contact.id} color="inherit" target="_blank" key={index}>
+                <Link
+                  href={contact.link}
+                  id={contact.id}
+                  color="inherit"
+                  target="_blank"
+                  key={index}
+                >
                   {socialMediaName(contact.site)}
                 </Link>
               ) : null;

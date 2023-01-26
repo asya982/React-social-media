@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Dialog from "./Dialog/Dialog";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
+import MessageForm from "./MessageForm";
 
 const Dialogs = (props) => {
-  let updateMessage = (e) => {
-    let newMessage = e.target.value;
-    props.updateNewMessage(newMessage);
+  let [typing, setTyping] = useState(false);
+  let [timerId, setTimerId] = useState(0);
+
+  useEffect(() => {
+    setTyping(false)
+  }, [props.messagesPage.location]);
+
+  let isTyping = () => {
+    clearTimeout(timerId);
+
+    setTyping(true);
+    setTimerId(setTimeout(() => setTyping(false), 1000));
   };
 
   let dialogElements = props.messagesPage.dialogsData.map((user) => (
     <Dialog
-      name={user.name}
-      id={user.id}
-      img={user.img}
+      {...user}
       key={user.id}
       location={props.router.params["*"]}
       selectUser={props.selectUser}
@@ -39,14 +47,12 @@ const Dialogs = (props) => {
       <section className={style.dialog_items}>{dialogElements}</section>
       <section className={style.messages}>
         {messageElements}
-        <div className={style.sendMessage}>
-          <textarea
-            onChange={updateMessage}
-            onChangeTimerDelay
-            value={props.messagesPage.newMessage}
-          ></textarea>
-          <button onClick={props.sendMessage}>Send</button>
-        </div>
+        {typing && <span className={style.typing}>typing...</span>}
+        <MessageForm
+          sendMessage={props.sendMessage}
+          location={props.messagesPage.location}
+          isTyping={isTyping}
+        />
       </section>
     </div>
   );

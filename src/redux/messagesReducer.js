@@ -1,4 +1,3 @@
-const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
 const SELECT_USER = "SELECT_USER";
 
@@ -33,24 +32,15 @@ let initialState = {
         ],
 
     ],
-    newMessage: "",
     location: 0
 };
 
 const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessage: action.newMessage
-            };
         case SEND_MESSAGE:
-            if (state.newMessage.trim() === "") {
-                return state;
-            }
             let newMessage = {
                 id: state.messageData[state.location - 1]?.length + 1,
-                message: state.newMessage,
+                message: action.newMessage,
                 sentBy: "Asya"
             };
             return {
@@ -61,22 +51,18 @@ const messagesReducer = (state = initialState, action) => {
                     }
                     return message;
                 }),
-                newMessage: ""
-
             };
         case SELECT_USER:
             return {
                 ...state,
-                location: action.location,
-                newMessage: ""
+                location: action.location
             };
         default:
             return state
     }
 };
 
-export const updateNewMessage = (newMessage) => ({ type: UPDATE_NEW_MESSAGE_BODY, newMessage });
-export const sendMessage = () => ({ type: SEND_MESSAGE });
+export const sendMessage = (newMessage) => ({ type: SEND_MESSAGE, newMessage });
 export const selectUser = (location) => ({ type: SELECT_USER, location });
 
 export default messagesReducer;

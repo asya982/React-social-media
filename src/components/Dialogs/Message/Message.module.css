@@ -4,6 +4,8 @@
     border-radius: 10px;
     padding: 10px;
     color: rgb(106, 110, 114);
+    word-break: break-all;
+    max-width: 50%;
 }
 
 .message p{

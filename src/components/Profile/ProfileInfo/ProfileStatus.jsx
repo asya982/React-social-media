@@ -4,11 +4,32 @@ import styles from "./ProfileInfo.module.css";
 class ProfileStatus extends React.Component {
   state = {
     editMode: false,
+    status: this.props.status,
   };
 
-  toggleEditMode = () => {
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.status !== this.props.status) {
+      this.setState({
+        status: this.props.status,
+      });
+    }
+  };
+
+  activateEditMode = () => {
     this.setState({
-      editMode: !this.state.editMode,
+      editMode: true,
+    });
+  };
+  deactivateEditMode = () => {
+    this.setState({
+      editMode: false,
+    });
+    this.props.updateStatus(this.state.status);
+  };
+
+  onStatusChange = (e) => {
+    this.setState({
+      status: e.target.value,
     });
   };
 
@@ -17,13 +38,16 @@ class ProfileStatus extends React.Component {
       <p className={styles.status}>
         Status:
         {!this.state.editMode && (
-          <span onDoubleClick={this.toggleEditMode}>{this.props.status}</span>
+          <span onDoubleClick={this.activateEditMode}>
+            {this.props.status || "------"}
+          </span>
         )}
         {this.state.editMode && (
           <input
             autoFocus
-            onBlur={this.toggleEditMode}
-            value={this.props.status}
+            onBlur={this.deactivateEditMode}
+            value={this.state.status}
+            onChange={this.onStatusChange}
           />
         )}
       </p>
