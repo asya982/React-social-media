@@ -8,7 +8,7 @@ import { withRouter } from "../../hoc/withRouter";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    let userId = this.props.router.params.userId;
+    let userId = this.props.router.params.userId || this.props.currentUser ;
     this.props.getProfile(userId);
     this.props.getStatus(userId);
   }
@@ -20,7 +20,8 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   userInfo: state.profilePage.profile.userInfo,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  currentUser: state.auth.id
 });
 
 export default compose(

@@ -10,7 +10,7 @@ const Navbar = (props) => {
         <li>
           <NavLink
             className={(navData) => (navData.isActive ? style.active : null)}
-            to="/profile/27546"
+            to="/profile"
           >
             Profile
           </NavLink>

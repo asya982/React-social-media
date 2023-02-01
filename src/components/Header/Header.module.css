@@ -17,6 +17,7 @@
 }
 
 .loginBlock {
+  display: flex;
   border: 2px solid var(--light);
   border-radius: 10px;
   padding: 10px;

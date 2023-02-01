@@ -21,6 +21,15 @@
     border: 2px solid var(--blue);
 }
 
+.form p{
+  color: var(--accent);
+}
+
+.form p::before {
+  display: inline;
+  content: "⚠ ";
+}
+
 .remeberMe {
     display: flex;
     gap: 20px;
@@ -31,4 +40,8 @@
 .remeberMe input {
     width: 20px;
     height: 20px;
+}
+
+.error {
+    color: var(--accent);
 }
