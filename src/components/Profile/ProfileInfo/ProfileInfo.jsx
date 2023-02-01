@@ -50,7 +50,12 @@ const ProfileInfo = (props) => {
         />
         <div className={styles.userInfo}>
           <h2>{props.userInfo.fullName}</h2>
-          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+          <ProfileStatus
+            status={props.status}
+            updateStatus={props.updateStatus}
+            userId={props.userInfo.userId}
+            currentUser={props.currentUser}
+          />
           <p>
             About: <span>{props.userInfo.aboutMe}</span>
           </p>

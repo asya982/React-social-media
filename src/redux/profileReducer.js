@@ -30,7 +30,7 @@ let initialState = {
             }
         },
     },
-      status: ""
+    status: ""
 };
 
 const profileReducer = (state = initialState, action) => {
