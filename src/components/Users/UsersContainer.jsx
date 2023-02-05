@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getUsers, changeFollowingState } from "../../redux/usersReducer";
 import Users from "./Users";
-import Loader from "../Loader/Loader";
+import Loader from "../common/Loader/Loader";
 import {
   getCurrentPage,
   getFollowingInProgres,

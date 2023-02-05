@@ -1,62 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import styles from "./ProfileInfo.module.css";
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    status: this.props.status,
-  };
+const ProfileStatus = (props) => {
+  let [editMode, setEditMode] = useState(false);
 
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status,
-      });
+  let [status, setStatus] = useState(props.status);
+
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status]);
+
+  const activateEditMode = () => {
+    if (props.userId === props.currentUser) {
+      setEditMode(true);
     }
   };
 
-  activateEditMode = () => {
-    if (this.props.userId === this.props.currentUser) {
-      this.setState({
-        editMode: true,
-      });
+  const deactivateEditMode = () => {
+    setEditMode(false);
+    if (props.status !== status) {
+      props.updateStatus(status);
     }
   };
-  deactivateEditMode = () => {
-    this.setState({
-      editMode: false,
-    });
-    if (this.props.status !== this.state.status) {
-      this.props.updateStatus(this.state.status);
-    }
-  };
-
-  onStatusChange = (e) => {
-    this.setState({
-      status: e.target.value,
-    });
-  };
-
-  render = () => (
+  return (
     <>
       <p className={styles.status}>
         Status:
-        {!this.state.editMode && (
-          <span onDoubleClick={this.activateEditMode}>
-            {this.props.status || "------"}
+        {!editMode && (
+          <span onDoubleClick={activateEditMode}>
+            {props.status || "------"}
           </span>
         )}
-        {this.state.editMode && (
+        {editMode && (
           <input
             autoFocus
-            onBlur={this.deactivateEditMode}
-            value={this.state.status}
-            onChange={this.onStatusChange}
+            onBlur={deactivateEditMode}
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
           />
         )}
       </p>
     </>
   );
-}
+};
 
 export default ProfileStatus;

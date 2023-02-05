@@ -6,7 +6,7 @@ import Post from "./Post/Post";
 const PostForm = (props) => {
   let { register, handleSubmit, reset } = useForm();
 
-  let addPost = ({postText}) => {
+  let addPost = ({ postText }) => {
     if (postText.trim()) {
       props.onAddPost(postText);
       reset();

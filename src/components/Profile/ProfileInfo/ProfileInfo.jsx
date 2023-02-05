@@ -7,7 +7,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { Link } from "@mui/material";
 import userIcon from "./../../../assets/images/login.png";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatus from "./ProfileStatusClassComponent";
 
 const ProfileInfo = (props) => {
   const availableSites = ["facebook", "twitter", "instagram", "github"];

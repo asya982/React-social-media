@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from './hoc/withRouter';
 import { initalizeApp } from "./redux/appReducer";
-import Loader from './components/Loader/Loader';
+import Initialization from './components/common/Initialization/Initialization';
 
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
 
   render = () => {
     if (!this.props.initialized) {
-      return <Loader />
+      return <Initialization />
     }
     return (
       <div className='app-wrapper'>
