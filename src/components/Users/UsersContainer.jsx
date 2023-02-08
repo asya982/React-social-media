@@ -14,7 +14,8 @@ import {
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize);
+    const {currentPage, pageSize} = this.props
+    this.props.getUsers(currentPage, pageSize);
   };
 
   render = () => {

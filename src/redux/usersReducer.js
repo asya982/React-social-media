@@ -1,11 +1,11 @@
 import { followAPI, usersAPI } from "../API/api";
 
-const CHANGE_FOLLOW_STATE = 'CHANGE_FOLLOW_STATE';
-const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_FOLLOWING_BUTTON = 'TOGGLE_FOLLOWING_BUTTON';
+const CHANGE_FOLLOW_STATE = 'social-media/users/CHANGE_FOLLOW_STATE';
+const SET_USERS = 'social-media/users/SET_USERS';
+const SET_CURRENT_PAGE = 'social-media/users/SET_CURRENT_PAGE';
+const SET_TOTAL_USERS = 'social-media/users/SET_TOTAL_USERS';
+const TOGGLE_IS_FETCHING = 'social-media/users/TOGGLE_IS_FETCHING';
+const TOGGLE_FOLLOWING_BUTTON = 'social-media/users/TOGGLE_FOLLOWING_BUTTON';
 
 let initialState = {
     users: [],
@@ -67,32 +67,29 @@ export const setTotalUsers = (count) => ({ type: SET_TOTAL_USERS, count })
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggleFollowingButton = (followingInProgres, id) => ({ type: TOGGLE_FOLLOWING_BUTTON, followingInProgres, id })
 
-export const getUsers = (currentPage, pageSize) => (dispatch) => {
+export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(setCurrentPage(currentPage));
     dispatch(toggleIsFetching(true));
 
-    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+    let data = await usersAPI.getUsers(currentPage, pageSize);
 
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUsers(data.totalCount));
-        dispatch(toggleIsFetching(false));
-
-    });
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsers(data.totalCount));
+    dispatch(toggleIsFetching(false));
 
 };
 
-export const changeFollowingState = (userId, follow) => (dispatch) => {
+export const changeFollowingState = (userId, follow) => async (dispatch) => {
 
     dispatch(toggleFollowingButton(true, userId));
-    
-    let requestApi = follow ? followAPI.follow(userId) : followAPI.unfollow(userId);
-    requestApi.then((data) => {
-        if (data.resultCode === 0) {
-            dispatch(followStateAC(userId, follow));
-        }
-        dispatch(toggleFollowingButton(false, userId));
-    });
 
+    let requestApi = follow ? followAPI.follow(userId) : followAPI.unfollow(userId);
+
+    let data = await requestApi;
+    if (data.resultCode === 0) {
+        dispatch(followStateAC(userId, follow));
+    }
+    dispatch(toggleFollowingButton(false, userId));
 };
 
 

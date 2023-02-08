@@ -1,5 +1,5 @@
-const SEND_MESSAGE = "SEND-MESSAGE";
-const SELECT_USER = "SELECT_USER";
+const SEND_MESSAGE = "social-media/message/SEND-MESSAGE";
+const SELECT_USER = "social-media/message/SELECT_USER";
 
 let initialState = {
     dialogsData: [

@@ -18,6 +18,7 @@ import Initialization from './components/common/Initialization/Initialization';
 
 
 class App extends React.Component {
+  
   componentDidMount = () => {
     this.props.initalizeApp();
   };
@@ -29,7 +30,7 @@ class App extends React.Component {
     return (
       <div className='app-wrapper'>
         <HeaderContainer />
-        <Navbar state={this.props.state.navbar} />
+        <Navbar friends={this.props.navbar.friends} />
         <div className='app-wrapper-content'>
           <Routes><Route path='/profile/:userId?' element={<ProfileContainer />} />
             <Route path='/dialogs/*' element={<DialogsContainer />} />
@@ -47,7 +48,8 @@ class App extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-  initialized: state.app.initialized
+  initialized: state.app.initialized,
+  navbar: state.navbar
 });
 
 

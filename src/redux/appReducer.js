@@ -1,6 +1,6 @@
 import { authentication } from "./authReducer";
 
-const INITIALIZE_SUCCESS = 'INITIALIZE_SUCCESS';
+const INITIALIZE_SUCCESS = 'social-media/app/INITIALIZE_SUCCESS';
 
 
 const initialState = {
@@ -21,11 +21,9 @@ const appReducer = (state = initialState, action) => {
 
 export const initializeSuccess = () => ({ type: INITIALIZE_SUCCESS });
 
-export const initalizeApp = () => (dispatch) => {
-    dispatch(authentication()).then(() => {
-        dispatch(initializeSuccess());
-    });
-
+export const initalizeApp = () => async (dispatch) => {
+    await dispatch(authentication());
+    dispatch(initializeSuccess());
 };
 
 

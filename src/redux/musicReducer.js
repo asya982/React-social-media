@@ -1,4 +1,4 @@
-const PLAY_STOP = "PLAY_STOP";
+const PLAY_STOP = "social-media/music/PLAY_STOP";
 
 let initialState = {
     music: [

@@ -1,0 +1,30 @@
+.totalCount{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+}
+
+.selected {
+    color: var(--accent);
+    font-size: large;
+    font-weight: bold;
+}
+
+.totalCount span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+}
+
+.totalCount span:hover{
+    background-color: var(--accent);
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+}
