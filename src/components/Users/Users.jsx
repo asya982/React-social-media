@@ -8,7 +8,7 @@ const Users = (props) => {
 
   return (
     <div className={styles.Users}>
-      <Pagination totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} getUsers={getUsers}/>
+      <Pagination totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} getUsers={getUsers}/>
       {props.users.map((u, index) => (
         <User
           {...u}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -10,11 +10,12 @@ import MusicContainer from './components/Music/MusicContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from './hoc/withRouter';
 import { initalizeApp } from "./redux/appReducer";
 import Initialization from './components/common/Initialization/Initialization';
+import store from './redux/redux-store';
 
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
             <Route path='/settings/*' element={<Settings />} />
             <Route path='/users/*' element={<UsersContainer />} />
             <Route path='/login' element={<LoginContainer />} />
+            <Route path='/friends' element={<UsersContainer friendsOnly={true} />} />
           </Routes>
         </div>
       </div>
@@ -53,7 +55,20 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default compose(
+const AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { initalizeApp })
 )(App);
+
+
+const SamuraiJSApp = () => {
+  return (
+    <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+  )
+}
+
+export default SamuraiJSApp;

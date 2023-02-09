@@ -14,13 +14,27 @@ import {
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
-    const {currentPage, pageSize} = this.props
-    this.props.getUsers(currentPage, pageSize);
+    const { currentPage, pageSize } = this.props;
+    if (!this.props.friendsOnly) {
+      this.props.getUsers(currentPage, pageSize, false);
+    } else {
+     
+      this.props.getUsers(currentPage, pageSize, true);
+    }
   };
+
+  getUsers = (page) => {
+    if (this.props.friendsOnly) {
+      this.props.getUsers(page, this.props.pageSize, true);
+    } else {
+      this.props.getUsers(page, this.props.pageSize, false);
+    }
+  }
+
 
   render = () => {
     return (
-      <>{this.props.isFetching ? <Loader /> : <Users {...this.props} />}</>
+      <>{this.props.isFetching ? <Loader /> : <Users {...this.props} getUsers={this.getUsers} />}</>
     );
   };
 }

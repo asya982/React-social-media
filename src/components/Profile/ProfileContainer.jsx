@@ -7,6 +7,14 @@ import { compose } from "redux";
 import { withRouter } from "../../hoc/withRouter";
 
 class ProfileContainer extends React.Component {
+
+  componentDidUpdate(previousProps) {
+    if (previousProps.router.params.userId !== this.props.router.params.userId) {
+      this.props.getProfile(this.props.currentUser);
+      this.props.getStatus(this.props.currentUser);
+    }
+  }
+
   componentDidMount() {
     let userId = this.props.router.params.userId || this.props.currentUser ;
     this.props.getProfile(userId);

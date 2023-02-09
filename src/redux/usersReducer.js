@@ -62,16 +62,16 @@ const usersReducer = (state = initialState, action) => {
 
 export const followStateAC = (userId, isFollowed) => ({ type: CHANGE_FOLLOW_STATE, userId, isFollowed });
 export const setUsers = (users) => ({ type: SET_USERS, users: users })
-export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page })
-export const setTotalUsers = (count) => ({ type: SET_TOTAL_USERS, count })
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
-export const toggleFollowingButton = (followingInProgres, id) => ({ type: TOGGLE_FOLLOWING_BUTTON, followingInProgres, id })
+export const setCurrentPage = (page) => ({ type: SET_CURRENT_PAGE, page });
+export const setTotalUsers = (count) => ({ type: SET_TOTAL_USERS, count });
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const toggleFollowingButton = (followingInProgres, id) => ({ type: TOGGLE_FOLLOWING_BUTTON, followingInProgres, id });
 
-export const getUsers = (currentPage, pageSize) => async (dispatch) => {
+export const getUsers = (currentPage, pageSize, friendsOnly) => async (dispatch) => {
     dispatch(setCurrentPage(currentPage));
     dispatch(toggleIsFetching(true));
 
-    let data = await usersAPI.getUsers(currentPage, pageSize);
+    let data =  friendsOnly ? await usersAPI.getFriends(currentPage, pageSize) :  await usersAPI.getUsers(currentPage, pageSize);
 
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));
