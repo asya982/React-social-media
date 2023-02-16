@@ -36,7 +36,6 @@ const Pagination = ({
             <span
               className={currentPage === p ? styles.selected : undefined}
               onClick={() => {
-                debugger;
                 getUsers(p)}
               } 
               key={index}
