@@ -3,16 +3,16 @@ const SELECT_USER = "social-media/message/SELECT_USER";
 
 let initialState = {
     dialogsData: [
-        { id: 1, name: "Dimkins", img: "https://i.pinimg.com/564x/e9/7a/03/e97a03628dde5de1f81c32ac2b4dac50.jpg" },
+        { id: 1, name: "Himars", img: "https://i.pinimg.com/564x/e9/7a/03/e97a03628dde5de1f81c32ac2b4dac50.jpg" },
         { id: 2, name: "Alinka", img: "https://i.pinimg.com/736x/37/66/fb/3766fb3469f305cacee6a09330a68427.jpg" },
         { id: 3, name: "Specter", img: "https://i.pinimg.com/564x/5a/3d/77/5a3d770ea0afe88aa310ac95e92e5afd.jpg" },
         { id: 4, name: "HR", img: "https://i.pinimg.com/564x/a7/24/71/a72471dd545f027432c22c77b8a2d805.jpg" },
     ],
 
     messageData: [
-        [{ id: 1, message: "Hi", sentBy: "Dimkins" },
+        [{ id: 1, message: "Hi", sentBy: "Himars" },
         { id: 2, message: "How are u?...", sentBy: "Asya" },
-        { id: 3, message: "Let`s watch Papurika", sentBy: "Dimkins" },
+        { id: 3, message: "Let`s watch Papurika", sentBy: "Himars" },
         { id: 4, message: "Ok, let's go!!", sentBy: "Asya" }],
         [{ id: 1, message: "How are you these days?", sentBy: "Alinka" },
         { id: 2, message: "I'm fine", sentBy: "Asya" },

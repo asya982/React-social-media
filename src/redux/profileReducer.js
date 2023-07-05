@@ -13,7 +13,6 @@ let initialState = {
             { id: 1, message: "Hello", likes: 200 },
             { id: 2, message: "I`m learning", likes: 300 },
             { id: 3, message: "React", likes: 250 },
-            { id: 4, message: "Dimkins loves ketchub", likes: 250 },
         ],
         userInfo: {
             fullName: "Asya",
