@@ -14,11 +14,7 @@
 }
 
 .form input{
-    padding: 10px;
-    border-radius: 10px;
     width: 100%;
-    outline: none;
-    border: 2px solid var(--blue);
 }
 
 .form p{

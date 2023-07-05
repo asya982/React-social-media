@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./User.module.css";
 import userIcon from "./../../../assets/images/login.png";
 import { NavLink } from "react-router-dom";
+import FollowUnfollow from "../../common/FollowUnfollow/FollowUnfollow";
 
 const User = (props) => {
   return (
@@ -10,29 +11,16 @@ const User = (props) => {
         <NavLink to={"/profile/" + props.id}>
           <img
             className={styles.avatar}
-            src={props.avatar ? props.avatar : userIcon}
+            src={props.avatar || userIcon}
             alt={props.Name}
           />
         </NavLink>
-        {props.followed ? (
-          <button
-            onClick={() => {
-              props.changeFollowState(props.id, false);
-            }}
-            disabled={props.followingInProgres.some((id) => id === props.id)}
-          >
-            Unfollow
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              props.changeFollowState(props.id, true);
-            }}
-            disabled={props.followingInProgres.some((id) => id === props.id)}
-          >
-            Follow
-          </button>
-        )}
+        <FollowUnfollow
+          id={props.id}
+          followingInProgres={props.followingInProgres}
+          followed={props.followed}
+          changeFollowState={props.changeFollowState}
+        />
       </div>
       <div className={styles.info}>
         <div className={styles.status}>

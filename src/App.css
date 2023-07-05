@@ -1,7 +1,7 @@
 :root {
   --accent: rgb(158, 43, 37);
   --blue: #c1d4e9;
-  --dark: #071E22;
+  --dark: rgb(7, 30, 34);
   --light: #FFFDEE;
 }
 
@@ -89,4 +89,21 @@ button:disabled {
 button:disabled:hover {
   transform: none;
   box-shadow: none;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid var(--blue);
+}
+
+textarea{
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  background-color: rgba(128, 128, 128, 0.076);
+  resize: none;
+  margin: 10px 0;
+  padding: 10px;
+  box-shadow:2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

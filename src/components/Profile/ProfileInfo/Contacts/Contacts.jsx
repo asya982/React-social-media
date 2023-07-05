@@ -39,7 +39,7 @@ const Contacts = ({userInfo}) => {
     <p className={styles.contacts}>
       Contacts:
       {contacts.map((contact, index) => {
-        return contact.link ? (
+        return contact.link && (
           <Link
             href={contact.link}
             id={contact.id}
@@ -49,7 +49,7 @@ const Contacts = ({userInfo}) => {
           >
             {socialMediaName(contact.site)}
           </Link>
-        ) : null;
+        );
       })}
     </p>
   );

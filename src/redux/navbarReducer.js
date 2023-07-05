@@ -29,6 +29,5 @@ const setFriends = (friends) => ({ type: GET_FRIENDS, friends });
 
 export const getFriends = () => async (dispatch) => {
     let data = await usersAPI.getFriends(1, 3);
-    console.log(data.items);
     dispatch(setFriends(data.items));
 }

@@ -11,6 +11,8 @@ import {
   getTotalUsersCount,
   getUsersSelector,
 } from "../../redux/selectors/usersSelector";
+import { compose } from "redux";
+import { withRouter } from "../../hoc/withRouter";
 
 class UsersContainer extends React.Component {
   componentDidMount = () => {
@@ -18,8 +20,15 @@ class UsersContainer extends React.Component {
     if (!this.props.friendsOnly) {
       this.props.getUsers(currentPage, pageSize, false);
     } else {
-     
       this.props.getUsers(currentPage, pageSize, true);
+    }
+  };
+
+  componentDidUpdate = (previousProps) => {
+    if (
+      previousProps.router.location.pathname !== this.props.router.location.pathname
+    ) {
+      this.componentDidMount();
     }
   };
 
@@ -29,12 +38,17 @@ class UsersContainer extends React.Component {
     } else {
       this.props.getUsers(page, this.props.pageSize, false);
     }
-  }
-
+  };
 
   render = () => {
     return (
-      <>{this.props.isFetching ? <Loader /> : <Users {...this.props} getUsers={this.getUsers} />}</>
+      <>
+        {this.props.isFetching ? (
+          <Loader />
+        ) : (
+          <Users {...this.props} getUsers={this.getUsers} />
+        )}
+      </>
     );
   };
 }
@@ -50,6 +64,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getUsers, changeFollowingState })(
-  UsersContainer,
-);
+export default compose(
+  connect(mapStateToProps, { getUsers, changeFollowingState }),
+  withRouter,
+)(UsersContainer);

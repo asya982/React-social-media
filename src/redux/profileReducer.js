@@ -1,9 +1,11 @@
 import { profileAPI } from "../API/api";
+import { serverError } from "./errorsReducer";
 
 const ADD_POST = "social-media/profile/ADD_POST";
 const SET_USER_PROFILE = "social-media/profile/SET_USER_PROFILE";
 const SET_STATUS = "social-media/profile/SET_STATUS";
 const DELETE_POST = "social-media/profile/DELETE_POST";
+const SET_PHOTOS = "social-media/profile/SET_PHOTOS";
 
 let initialState = {
     profile: {
@@ -73,6 +75,19 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status
 
             };
+        case SET_PHOTOS:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    userInfo: {
+                        ...state.profile.userInfo,
+                        photos: action.image
+                    }
+                }
+
+            };
+
         default:
             return state;
     }
@@ -83,24 +98,43 @@ export const addPostActionCreator = (newText) => ({ type: ADD_POST, newText });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+const savePhotoSucces = (image) => ({ type: SET_PHOTOS, image });
 
 export const getProfile = (userId) => async (dispatch) => {
-    let data = await profileAPI.getProfile(userId);
+    const data = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 };
 
 
 export const getStatus = (userId) => async (dispatch) => {
-    let data = await profileAPI.getStatus(userId);
-        dispatch(setStatus(data));
+    const data = await profileAPI.getStatus(userId);
+    dispatch(setStatus(data));
+};
+
+export const savePhoto = (photo) => async (dispatch) => {
+    const data = await profileAPI.setPhoto(photo);
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSucces(data.data.photos));
+    }
 };
 
 export const updateStatus = (status) => async (dispatch) => {
-    let data = await profileAPI.updateStatus(status);
+    const data = await profileAPI.updateStatus(status);
     if (data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 };
 
+export const saveProfile = (profileData) => async (dispatch, getState) => {
+    const currentUser = getState().auth.id;
+    const data = await profileAPI.updateProfileInfo(profileData);
+    if (data.resultCode === 0) {
+        dispatch(getProfile(currentUser));
+    } else {
+        // need to add server-error side validation;
+        dispatch(serverError(data.messages));
+        return Promise.reject(data.messages[0]);
+    }
+};
 
 export default profileReducer;

@@ -5,7 +5,6 @@ import Pagination from "../common/Pagination/Pagination";
 
 const Users = (props) => {
   const { totalUsersCount, pageSize, currentPage, changeFollowingState, followingInProgres, getUsers} = props;
-
   return (
     <div className={styles.Users}>
       <Pagination totalItemsCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} getUsers={getUsers}/>

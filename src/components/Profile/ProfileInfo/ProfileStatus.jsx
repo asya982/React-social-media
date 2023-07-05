@@ -12,7 +12,7 @@ const ProfileStatus = (props) => {
   }, [props.status]);
 
   const activateEditMode = () => {
-    if (props.userId === props.currentUser) {
+    if (props.isOwner) {
       setEditMode(true);
     }
   };

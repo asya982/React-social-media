@@ -1,44 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ProfileInfo.module.css";
-import banner from "./../../../assets/images/banner.png";
 import userIcon from "./../../../assets/images/login.png";
-import ProfileStatus from "./ProfileStatusClassComponent";
-import Contacts from "./Contacts/Contacts";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import ProfileData from "./ProfileData";
+import ProfileDataForm from "./ProfileDataForm/ProfileDataForm";
 
-const ProfileInfo = ({userInfo, status, updateStatus, currentUser}) => {
+const ProfileInfo = ({
+  userInfo,
+  status,
+  updateStatus,
+  currentUser,
+  isOwner,
+  saveProfile,
+  ...props
+}) => {
+  const getFileFromUser = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  };
+
+  let [editmode, setEditMode] = useState(false);
 
   return (
     <>
-      <img className={styles.banner} src={banner} alt="back" />
       <section className={styles.description}>
-        <img
-          className={styles.avatar}
-          src={
-            userInfo.photos.large ? userInfo.photos.large : userIcon
-          }
-          alt="avatar"
-        />
-        <div className={styles.userInfo}>
-          <h2>{userInfo.fullName}</h2>
-          <ProfileStatus
+        <div className={styles.userPhoto}>
+          <img
+            className={styles.avatar}
+            src={userInfo.photos.large || userIcon}
+            alt="avatar"
+          />
+          {isOwner && (
+            <div className={styles.addPhoto}>
+              <label htmlFor="photo">
+                Change Photo
+                <input id="photo" type={"file"} onChange={getFileFromUser} />
+                <AddAPhotoIcon />
+              </label>
+            </div>
+          )}
+        </div>
+        {editmode && isOwner ? (
+          <ProfileDataForm
+            {...props}
+            userInfo={userInfo}
+            isOwner={isOwner}
             status={status}
             updateStatus={updateStatus}
-            userId={userInfo.userId}
-            currentUser={currentUser}
+            saveProfile={saveProfile}
+            saveChanges={() => setEditMode(false)}
           />
-          <p>
-            About: <span>{userInfo.aboutMe}</span>
-          </p>
-          <p>
-            Job status:{" "}
-            <span>
-              {userInfo.lookingForAJob
-                ? userInfo.lookingForAJobDescription
-                : " Enjoying my life"}
-            </span>
-          </p>
-         <Contacts userInfo={userInfo}/>
-        </div>
+        ) : (
+          <ProfileData
+            {...props}
+            userInfo={userInfo}
+            isOwner={isOwner}
+            status={status}
+            updateStatus={updateStatus}
+            goToEditMode={() => setEditMode(true)}
+          />
+        )}
       </section>
     </>
   );

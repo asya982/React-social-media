@@ -26,6 +26,10 @@ export const followAPI = {
     follow(userId) {
         return instance.post("follow/" + userId)
             .then(response => response.data);
+    },
+    checkIsFollowed(userId) {
+        return instance.get("follow/" + userId)
+            .then(response => response.data);
     }
 };
 
@@ -53,6 +57,21 @@ export const profileAPI = {
     },
     updateStatus(status) {
         return instance.put("/profile/status", { status: status })
+            .then(response => response.data);
+    },
+    setPhoto(image) {
+        const formData = new FormData();
+        formData.append("image", image);
+
+        return instance.put("profile/photo", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then(response => response.data);
+    },
+    updateProfileInfo(profileData) {
+        return instance.put("/profile", profileData )
             .then(response => response.data);
     }
 };

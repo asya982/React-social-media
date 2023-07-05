@@ -2,6 +2,7 @@
   "name": "social-media",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://asya982.github.io/React-social-media",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -28,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,9 +51,12 @@
       "last 1 safari version"
     ]
   },
-  "jest": { 
-    "transformIgnorePatterns": [ 
-      "node_modules/(?!(react-leaflet|@react-leaflet|d3-*|axios))" 
-    ] 
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-leaflet|@react-leaflet|d3-*|axios))"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
