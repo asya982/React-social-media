@@ -37,7 +37,7 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar friends={this.props.navbar.friends} />
         <div className='app-wrapper-content'>
-          <Routes><Route path='/profile/:userId?' element={ withSuspense(ProfileContainer) } />
+          <Routes><Route path='/profile/:userId?' index element={ withSuspense(ProfileContainer) } />
             <Route path='/dialogs/*' element={ withSuspense(DialogsContainer) } />
             <Route path='/news/*' element={<News />} />
             <Route path='/music/*' element={<MusicContainer />} />

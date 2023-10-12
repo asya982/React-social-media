@@ -34,7 +34,7 @@ const ProfileData = ({
         </span>
       </p>
       <Contacts userInfo={userInfo} />
-      {/* {!props.isOwner && <FollowUnfollow />} */}
+      {!props.isOwner && <FollowUnfollow id={userInfo.userId} { ...props} />}
     </div>
   );
 };

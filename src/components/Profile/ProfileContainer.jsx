@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component {
         {...this.props}
         isOwner={
           !this.props.router.params.userId ||
-          this.props.router.params.userId == this.props.currentUser
+          Number(this.props.router.params.userId) === this.props.currentUser
         }
       />
     );

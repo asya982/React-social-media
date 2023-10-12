@@ -6,15 +6,12 @@ const ProfileDataForm = ({
   userInfo,
   saveProfile,
   saveChanges,
-  serverError,
-  clearServerError,
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-    clearErrors,
   } = useForm({
     defaultValues: {
       ...userInfo,
@@ -32,14 +29,7 @@ const ProfileDataForm = ({
     });
   };
 
-  const clearServerErrors = () => {
-    clearServerError();
-    clearErrors("root.serverError");
-  };
 
-  const formatError = () => {}
-
-console.log("rendering");
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.userInfo}>
       <ErrorMessage name="root.serverError" errors={errors} as="p" />

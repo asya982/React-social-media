@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./FollowUnfollow.module.css";
+import { changeFollowingState } from "../../../redux/usersReducer";
 
 const FollowUnfollow = ({
   id,
   followed,
   followingInProgres,
-  changeFollowState,
 }) => {
   
   return (
@@ -13,7 +13,7 @@ const FollowUnfollow = ({
       {followed ? (
         <button
           onClick={() => {
-            changeFollowState(id, false);
+            changeFollowingState(id, false);
           }}
           disabled={followingInProgres.some((userId) => userId === id)}
         >
@@ -22,7 +22,7 @@ const FollowUnfollow = ({
       ) : (
         <button
           onClick={() => {
-            changeFollowState(id, true);
+            changeFollowingState(id, true);
           }}
           disabled={followingInProgres.some((userId) => userId === id)}
         >
